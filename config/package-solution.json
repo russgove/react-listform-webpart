@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "name": "react-listform-webpart-client-side-solution",
+    "id": "f934e03e-40f5-487c-93f8-14d9a1b23074",
+    "version": "1.0.0.0"
+  },
+  "paths": {
+    "zippedPackage": "solution/react-listform-webpart.sppkg"
+  }
+}

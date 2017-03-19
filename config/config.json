@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "entry": "./lib/webparts/listForm/ListFormWebPart.js",
+      "manifest": "./src/webparts/listForm/ListFormWebPart.manifest.json",
+      "outputPath": "./dist/list-form.bundle.js"
+    }
+  ],
+  "externals": {},
+  "localizedResources": {
+    "listFormStrings": "webparts/listForm/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "libraryName": "react-listform-webpart",
+    "framework": "react",
+    "version": "1.0.0",
+    "libraryId": "f934e03e-40f5-487c-93f8-14d9a1b23074"
+  }
+}

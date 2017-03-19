@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../node_modules/@microsoft/sp-module-interfaces/lib/manifestSchemas/jsonSchemas/clientSideComponentManifestSchema.json",
+
+  "id": "cf828287-9d9a-4c33-9dd6-0050be169aad",
+  "alias": "ListFormWebPart",
+  "componentType": "WebPart",
+  "version": "0.0.1",
+  "manifestVersion": 2,
+
+  "preconfiguredEntries": [{
+    "groupId": "cf828287-9d9a-4c33-9dd6-0050be169aad",
+    "group": { "default": "Under Development" },
+    "title": { "default": "ListForm" },
+    "description": { "default": "ListForm" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "ListForm"
+    }
+  }]
+}
