@@ -4,16 +4,45 @@ import { Web } from "sp-pnp-js";
 import FieldDefinition from "./FieldDefinition";
 import { IFieldDefinitionProps } from './IFieldDefinitionProps';
 import { IFieldDefinitionState } from './IFieldDefinitionState';
-import { IColumn, DetailsList, DetailsRow, Panel, PanelType, Label, Button, ButtonType, TextField, CommandBar, Dropdown, IDropdownOption, Toggle, Slider } from "office-ui-fabric-react";
+import {
+    IColumn, DetailsList, DetailsRow, Panel, PanelType,
+    Label, Button, ButtonType, TextField, CommandBar, Dropdown, IDropdownOption, Toggle, Slider
+} from "office-ui-fabric-react";
 
 import { Guid, Log } from "@microsoft/sp-core-library";
 
 
 
 export default class FieldDefinitions extends React.Component<IFieldDefinitionProps, IFieldDefinitionState> {
-    
-    private renderRestrictVisibility(item?: any, index?: number, columncc?: IColumn):any{
+    private groupOptions: Array<IDropdownOption> = [];
+    private toggleUpdated(item: any, column: IColumn, checked: boolean): void {
+        debugger;
+        item[column.fieldName] = checked;
+        this.setState(this.state);
+    }
+    private renderToggle(item?: any, index?: number, column?: IColumn): any {
 
+        return (<Toggle
+            checked={item[column.fieldName]}
+            onChanged={(val: boolean) => this.toggleUpdated(item, column, val)}
+
+        >
+        </Toggle>);
+    }
+    private dropDownUpdated(item: any, column: IColumn, selected: IDropdownOption): void {
+        debugger;
+        item[column.fieldName] = selected.text;
+        this.setState(this.state);
+    }
+
+    private renderGroupSelect(item?: any, index?: number, column?: IColumn): any {
+
+        return (<Dropdown
+            label=""
+            options={this.groupOptions}
+            onChanged={(val: IDropdownOption) => this.dropDownUpdated(item, column, val)}
+        >
+        </Dropdown>);
     }
     private columns: Array<IColumn> = [
         {
@@ -21,33 +50,40 @@ export default class FieldDefinitions extends React.Component<IFieldDefinitionPr
             name: "internalName",
             fieldName: "internalName",
             minWidth: 20,
-            maxWidth:200,
+            maxWidth: 200,
         },
         {
             key: "restrictVisibility",
             name: "restrictVisibility",
             fieldName: "restrictVisibility",
             minWidth: 20,
-            onRender:{this.renderRestrictVisibility.bind(this)}
+            maxWidth: 200,
+            onRender: this.renderToggle.bind(this)
 
         },
         {
             key: "restrictVisibilityTo",
             name: "restrictVisibilityTo",
             fieldName: "restrictVisibilityTo",
-            minWidth: 100
+            minWidth: 100,
+            maxWidth: 200,
+            onRender: this.renderGroupSelect.bind(this)
+
         },
-         {
+        {
             key: "restrictUpdate",
             name: "restrictUpdate",
             fieldName: "restrictUpdate",
-            minWidth: 20
+            minWidth: 20,
+            maxWidth: 200,
+            onRender: this.renderToggle.bind(this)
         },
         {
             key: "retrictUpdateTo",
             name: "retrictUpdateTo",
             fieldName: "retrictUpdateTo",
-            minWidth: 100
+            minWidth: 100,
+            maxWidth: 200,
         },
     ];
 
@@ -83,6 +119,12 @@ export default class FieldDefinitions extends React.Component<IFieldDefinitionPr
         spWeb.siteGroups.get()
             .then((siteGroups) => {
                 debugger;
+                for (const siteGroup of siteGroups) {
+                    this.groupOptions.push({
+                        key: siteGroup.Title,
+                        text: siteGroup.Title,
+                    })
+                }
             })
             .catch((e) => {
                 debugger;
@@ -107,10 +149,10 @@ export default class FieldDefinitions extends React.Component<IFieldDefinitionPr
                     <Panel
                         isOpen={this.state.showPanel} hasCloseButton={true} onDismiss={this.onClosePanel}
                         isLightDismiss={true} type={PanelType.large}
-                        headerText="Field Defonotions">
+                        headerText="Field Definitions">
                         <DetailsList
                             items={this.state.fieldDefinitions}
-                            columns={this.columns}                  
+                            columns={this.columns}
                         >
                         </DetailsList>
                     </Panel>

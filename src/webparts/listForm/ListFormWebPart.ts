@@ -63,9 +63,9 @@ export default class ListFormWebPart extends BaseClientSideWebPart<IListFormWebP
                   label: "fields",
                   fieldDefinitions: this.properties.fields,
                   onPropertyChange: this.onFieldDefinitionsChange.bind(this),
-                  listId: "4135a310-6e4f-46dc-8ac9-62e0007e5117",
+                  listId: "d5ed30bb-d788-4363-8b2d-955408506647",
                   // listId:this.context.pageContext.list.id.toString()
-                  webUrl: "https://rgove3.sharepoint.com/"
+                  webUrl: "https://tronoxglobal.sharepoint.com/teams/itMigration/"
 
                 })
               ]
